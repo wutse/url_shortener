@@ -1,0 +1,33 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Src</th>
+      <th scope="col">Dst</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>sample</td>
+      <td>sample</td>
+      <td class="d-flex justify-content-end">
+        <a class="btn btn-success" href="./urlShorteners/sample/edit">edit</a>
+        <form action="./urlShorteners/sample?_method=DELETE" method="POST" style="display: inline;">
+          <button class="btn btn-danger" type="submit">delete</button>
+        </form>
+      </td>
+    </tr>
+    {{#each urlShorteners}}
+    <tr>
+      <td><a href="{{this.src}}">{{this.src}}</a></td>
+      <td><a href="http://localhost:3000/{{this.shortDst}}">{{this.shortDst}}</a></td>
+      <td class="d-flex justify-content-end">
+        <a class="btn btn-success" href="./urlShorteners/{{ this._id }}/edit">edit</a>
+        <form action="./urlShorteners/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+          <button class="btn btn-danger" type="submit">delete</button>
+        </form>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

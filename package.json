@@ -1,0 +1,28 @@
+{
+  "name": "url_shortener",
+  "version": "1.0.0",
+  "description": "ac exercise",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wutse/url_shortener.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wutse/url_shortener/issues"
+  },
+  "homepage": "https://github.com/wutse/url_shortener#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.4",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.0.8"
+  }
+}
