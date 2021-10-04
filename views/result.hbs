@@ -5,10 +5,18 @@
   </div>
   <p class="d-flex justify-content-center mb-3">Success! Please use this link:</p>
   <div class="d-flex justify-content-center mb-3">
-    <input type="text" placeholder="source url" name="src" class="form-control" style="width:50%"
+    <input type="text" placeholder="source url" id="scr" name="src" class="form-control" style="width:50%"
            value="http://localhost:3000/{{result.shortDst}}" disabled>
   </div>
   <div class="d-flex justify-content-around">
-    <button type="submit" class="btn btn-success">Copy</button>
+    <button type="submit" id="btnSubmint" class="btn btn-success">Copy</button>
   </div>
 </div>
+
+<script type="text/javascript">
+  const resultUrl = document.querySelector('#src');
+  const btnSubmit = document.querySelector('#btnSubmint');
+  btnSubmit.addEventListener('click', () => {
+    document.execCommand('copy', resultUrl.value)
+  });
+</script>

@@ -39,19 +39,37 @@ router.get('/result/:id', (req, res) => {
     });
 });
 
+router.get('/:id/edit', (req, res) => {
+  console.log(`get => /urlShorteners/${req.params.id}/edit`);
+
+  return UrlShortener.findById(req.params.id)
+    .lean()
+    .then(result => {
+      console.log('find edit data');
+      console.log(result);
+      return res.render('edit', { url: result });
+    })
+    .catch(err => {
+      console.log('query result failed.');
+      console.log(err);
+    });
+});
+
+//create data
 router.post('/', async (req, res) => {
   console.log('post => /urlShorteners');
   console.log(req.body);
 
   let isOld = await UrlShortener.findOne({ src: req.body.src })
     .then(result => {
-      console.log('create same data.')
+      console.log('check same data.')
       if (result) {
-        console.log('redirect.')
+        console.log('same data, redirect.')
         res.redirect(`/urlShorteners/result/${result.id}`);
         return true;
       }
       else {
+        console.log('new data.')
         return false
       }
     })
@@ -87,6 +105,43 @@ router.post('/', async (req, res) => {
       console.log(err);
     });
 
+});
+
+//edit data
+router.put('/:id', (req, res) => {
+  console.log(`get => /urlShorteners/${req.params.id}/edit`);
+  console.log(req.params);
+  console.log(req.body);
+
+  return UrlShortener.findById(req.params.id)
+    .then(result => {
+      result.src = req.body.src;
+
+      console.log(result);
+
+      return result.save()
+        .then(() => res.redirect('/urlShorteners/list'))
+        .catch(err => {
+          console.log('save change data failed.');
+          console.log(err);
+        });
+    })
+    .catch(err => {
+      console.log('query result failed.');
+      console.log(err);
+    });
+});
+
+//delete data
+router.delete('/:id', (req, res) => {
+  console.log(`delete => /urlShorteners/${req.params.id}`);
+  return UrlShortener.findById(req.params.id)
+    .then(data => data.remove())
+    .then(() => res.redirect('/urlShorteners/list'))
+    .catch(err => {
+      console.log('delete data failed.');
+      console.log(err);
+    });
 });
 
 module.exports = router;
