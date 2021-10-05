@@ -18,7 +18,12 @@ router.get('/:shortDst', (req, res) => {
     .lean()
     .then(result => {
       console.log(result);
-      res.redirect(result.src);
+      if (result && result.src) {
+        res.redirect(result.src);
+      }
+      else {
+        res.redirect(`/urlShorteners/new?msg=src not found`);
+      }
     })
     .catch(err => {
       console.log('query src failed.');

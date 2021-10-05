@@ -13,7 +13,8 @@ router.get('/', (req, res) => {
 
 router.get('/new', (req, res) => {
   console.log('get => /urlShorteners/new');
-  res.render('index');
+  console.log(req.query);
+  res.render('index', { msg: req.query.msg });
 });
 
 router.get('/list', (req, res) => {
